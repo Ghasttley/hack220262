@@ -10,6 +10,11 @@ export default function Navbar() {
             Register
           </Link>
         </li>
+        <li className="py-2 px-4 hover:bg-slate-300 rounded-full transition-colors">
+          <Link to="/login" className="font-semibold text-slate-700">
+            Login
+          </Link>
+        </li>
       </ul>
     </nav>
   );
