@@ -5,6 +5,9 @@ interface Login {
     password: string;
 }
 
+
+
+    
 const inputClass =
     "w-full border-2 border-gray-500 rounded-full px-4 py-1 mb-2 bg-white";
 
@@ -13,16 +16,32 @@ export default function Login() {
         teamName: "",
         password: "",
     });
+
+    const [logged, setLogged]=useState(false);
     const [submitted, setSubmitted] = useState(false);
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setSubmitted(true);
+        
+        localStorage.setItem(
+            "token-info",
+            JSON.stringify(login)
+        );
+        setLogged(true);
     }
+
+    const logout = () => {
+        localStorage.removeItem("token-info");
+        setLogged(false);
+    };
+    
 
     return (
         <div className="size-full flex justify-center items-center">
             <article className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 bg-slate-200 sm:rounded-xl sm:my-5 px-10 py-4 flex flex-col items-center">
+                {!logged? (
+                <>    
                 <h1 className="text-2xl font-bold mb-3">Login Form</h1>
 
                 <form onSubmit={handleSubmit} className="w-full">
@@ -74,7 +93,12 @@ export default function Login() {
                     <p className="mt-4 font-bold text-green-700" role="status">
                         ¡Formulario enviado, {login.teamName || "team"}!
                     </p>
-                )}
+                )} </> ):(<>
+                        <h1>User is logged in</h1>
+                        <button onClickCapture={logout}>
+                            logout user
+                        </button>
+                    </>)}
             </article>
         </div>
     );
