@@ -46,7 +46,7 @@ export default function Register() {
 						</div>
 						<div className="w-full flex flex-col">
 							<label htmlFor="email" className="font-bold">
-								Lastname:
+								Email:
 							</label>
 							<input
 								type="text"
